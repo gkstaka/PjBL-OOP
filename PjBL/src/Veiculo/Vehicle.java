@@ -1,14 +1,18 @@
 package Veiculo;
 
 import Excecoes.*;
+import Pessoa.Client;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Locale;
 
-public class Vehicle implements Serializable {
+public class Vehicle implements Serializable{
     private String maker;
     private String model;
     private String plate;
+
+    private Client owner;
 
     public Vehicle(String maker, String model, String plate) throws VehicleExceptionInvalidMaker, VehicleExceptionInvalidModel, VehicleExceptionInvalidPlate {
         try {
@@ -55,4 +59,7 @@ public class Vehicle implements Serializable {
     }
 
 
+    public ArrayList<Vehicle> getFromClient(Client client) {
+        return new ArrayList<Vehicle>();
+    }
 }

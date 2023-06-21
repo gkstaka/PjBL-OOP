@@ -1,42 +1,66 @@
 package Swing;
 
-import Estabelecimento.Estabelecimento;
 import Functions.Serializer;
 import Pessoa.Client;
+import Swing.CustomComponents.CustomButton;
+//import Swing.Tabs.ClientTab;
+//import Swing.Tabs.Tab;
+//import Swing.Tabs.VehicleTab;
+//import Swing.Tabs.VehicleTab;
 import Veiculo.Vehicle;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.io.FileNotFoundException;
+import java.awt.event.*;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class SwingApp extends JFrame {
-    private ArrayList<Client> clients;
-    private ArrayList<Vehicle> vehicles;
+    private DefaultListModel<Client> clients;
+    private DefaultListModel<Vehicle> vehicles;
     private final String YELLOW = "#E6DC75";
+    private CustomButton clientButton;
+
 
     public SwingApp() {
-        readClients();
+        addKeyListener(exitFrame()); // Ctrl + W exit
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(null);
+        readObjects();
         setTitle("ParkWash");
-        setSize(800, 800);
+        setSize(750, 750);
         setResizable(false);
         ToolTipManager.sharedInstance().setInitialDelay(500);
         UIManager.put("ToolTip.background", YELLOW);
-        JTabbedPane tabs = new JTabbedPane();
-        /*JPanel tabParking = new TabParking();
-        tabs.add("Estacionamento", tabParking);
-        JPanel tabVehicle = new TabVehicle();
-        tabs.add("Veiculo", tabVehicle);
-        JPanel tabClient = new TabClient();
-        tabs.add("Cliente", tabClient);
-*/
-        add(tabs);
+        Font tabFont = new Font("DIALOG", Font.BOLD, 18);
+        clientButton = new CustomButton("Cliente");
+        clientButton.setFont(tabFont);
+        clientButton.setAnchor(10, 10);
+        clientButton.addActionListener(clientButtonListener());
+        add(clientButton);
+        JSeparator jSeparator1 = new JSeparator(SwingConstants.HORIZONTAL);
+        jSeparator1.setBounds(0, 50, 750, 5);
+        add(jSeparator1);
 
     }
+
+    private ActionListener clientButtonListener() {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("teste");
+                JPanel clientPanel = new JPanel();
+                clientPanel.setLayout(null);
+                clientPanel.setBounds(0, 60, 750, 600);
+                CustomButton addClientButton = new CustomButton("Adicionar cliente");
+                CustomButton removeClientButton = new CustomButton("Remover cliente");
+                CustomButton updateClientButton = new CustomButton("Alterar telefone");
+                addClientButton.setAnchor(10, 10);
+                clientPanel.add(addClientButton);
+                add(clientPanel);
+            }
+        };
+    }
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
@@ -49,26 +73,37 @@ public class SwingApp extends JFrame {
         });
     }
 
-    /*public static JPanel tabClient() {
+    private KeyAdapter exitFrame() {
+        return new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                int keyCode = e.getKeyCode();
+                if (e.isControlDown() && keyCode == KeyEvent.VK_W) {
+                    dispose();
+                }
+            }
+        };
+    }
 
-    }*/
-
-    public void readClients() {
+    private void readObjects() {
         try {
-            clients = (ArrayList) Serializer.read("clients.clt");
-            System.out.println("read");
+            clients = (DefaultListModel<Client>) Serializer.read("clients.clt");
         } catch (IOException | ClassNotFoundException exception) {
-            //exception.printStackTrace();
-            System.out.println("erro read");
-            clients = new ArrayList<Client>();
+            clients = new DefaultListModel<Client>();
         }
+
     }
 
-    public void writeClients() {
-        try {
-            Serializer.write("clients.clt", clients);
-        } catch (IOException exception) {
-            System.out.println("erro escrita");
-        }
+
+    private MouseAdapter tabChangeAction() {
+        return new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("update suppose");
+                //clientTab.updateListsUI();
+                //vehicleTab.updateListsUI();
+            }
+        };
     }
+
 }
