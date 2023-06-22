@@ -143,9 +143,9 @@
 //                            }
 //                        } catch (IOException exception) {
 //                            exception.printStackTrace();
-//                        } catch (CPFInvalido exception) {
+//                        } catch (PersonExceptionInvalidCPF exception) {
 //                            popError("CPF invalido");
-//                        } catch (TelefoneInvalido exception) {
+//                        } catch (PersonExceptionInvalidPhone exception) {
 //                            popError("Telefone invalido");
 //                        } catch (PersonExceptionCPFUsed exception) {
 //                            popError("CPF ja cadastrado");
@@ -223,7 +223,7 @@
 //
 //                            } catch (IOException exception) {
 //                                exception.printStackTrace();
-//                            } catch (TelefoneInvalido exception) {
+//                            } catch (PersonExceptionInvalidPhone exception) {
 //                                popError("Telefone invalido");
 //                            }
 //                        }
@@ -248,30 +248,30 @@
 //        };
 //    }
 //
-//    private ListSelectionListener selectUpdate() {
-//        return new ListSelectionListener() {
-//            @Override
-//            public void valueChanged(ListSelectionEvent e) {
-//                infoUpdate();
-//            }
-//        };
-//
-//    }
-//
-//    private void infoUpdate() {
-//        int selectedIndex = clientList.getSelectedIndex();
-//        if (selectedIndex != - 1) {
-//            Client client = clientsDefaultListModel.getElementAt(selectedIndex);
-//            nameDisplay.setText("<html>Nome:<br>" + client.getName() + "</html>");
-//            nameDisplay.setSize(200, nameDisplay.getPreferredSize().height);
-//            cpfDisplay.setText("CPF: " + client.getCpf());
-//            cpfDisplay.setSize(cpfDisplay.getPreferredSize());
-//            cpfDisplay.setAnchor(nameDisplay, 'V', 10);
-//            phoneDisplay.setText("Telefone: " + client.getPhone());
-//            phoneDisplay.setSize(phoneDisplay.getPreferredSize());
-//            phoneDisplay.setAnchor(cpfDisplay, 'V', 10);
+//    private ListSelectionListener selectUpdate(){
+//        return new ListSelectionListener(){
+//          @Override
+//          public void valueChanged(ListSelectionEvent e){
+//        int selectedIndex=clientList.getSelectedIndex();
+//        if(selectedIndex!=-1){
+//        Client client=clientsDefaultListModel.getElementAt(selectedIndex);
+//        nameDisplay.setText("<html>Nome:<br>"+client.getName()+"</html>");
+//        nameDisplay.setSize(200,nameDisplay.getPreferredSize().height);
+//        cpfDisplay.setText("CPF: "+client.getCpf());
+//        cpfDisplay.setSize(cpfDisplay.getPreferredSize());
+//        cpfDisplay.setAnchor(nameDisplay,'V',10);
+//        phoneDisplay.setText("Telefone: "+client.getPhone());
+//        phoneDisplay.setSize(phoneDisplay.getPreferredSize());
+//        phoneDisplay.setAnchor(cpfDisplay,'V',10);
 //
 //        }
+//        }
+//        };
+//
+//        }
+//
+//    private void infoUpdate() {
+//
 //    }
 //
 //

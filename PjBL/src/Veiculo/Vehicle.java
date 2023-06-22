@@ -1,18 +1,21 @@
 package Veiculo;
 
 import Excecoes.*;
-import Pessoa.Client;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Locale;
+import java.time.LocalDateTime;
 
-public class Vehicle implements Serializable{
+public abstract class Vehicle implements Serializable{
     private String maker;
     private String model;
     private String plate;
 
-    private Client owner;
+    private boolean isParked;
+    private int parkingSpotIndex;
+    private LocalDateTime parkedTime;
+    protected double minimumPrice;
+    protected double pricePerHour;
+    protected double pricePerDay;
 
     public Vehicle(String maker, String model, String plate) throws VehicleExceptionInvalidMaker, VehicleExceptionInvalidModel, VehicleExceptionInvalidPlate {
         try {
@@ -27,6 +30,8 @@ public class Vehicle implements Serializable{
         }
         if (plate.length() == 0) throw new VehicleExceptionInvalidPlate();
         this.plate = plate.toUpperCase();
+        isParked = false;
+        parkingSpotIndex = -1;
     }
 
     public String getPlate() {
@@ -58,8 +63,22 @@ public class Vehicle implements Serializable{
                 plate;
     }
 
-
-    public ArrayList<Vehicle> getFromClient(Client client) {
-        return new ArrayList<Vehicle>();
+    public boolean isParked() {
+        return isParked;
     }
+
+    public void setParked(boolean parked) {
+        isParked = parked;
+    }
+
+    public LocalDateTime getParkedTime() {
+        return parkedTime;
+    }
+
+    public void setParkedTime(LocalDateTime parkedTime) {
+        this.parkedTime = parkedTime;
+    }
+
+    public abstract double payParking();
+
 }

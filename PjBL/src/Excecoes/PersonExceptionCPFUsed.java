@@ -1,6 +1,6 @@
 package Excecoes;
 
-public class PersonExceptionCPFUsed extends ExceptionPerson{
+public class PersonExceptionCPFUsed extends PersonException {
     public PersonExceptionCPFUsed() {
         super("CPF ja cadastrado");
     }

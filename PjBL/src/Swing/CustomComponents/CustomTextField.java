@@ -4,8 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class CustomTextField extends JFormattedTextField {
-    //private final String LIGHT_GREY = "#bababa";
+public class CustomTextField extends JFormattedTextField implements ComponentInterface{
     private String defaultText;
     private boolean displayDefaultText;
 
@@ -36,11 +35,11 @@ public class CustomTextField extends JFormattedTextField {
             }
         });
     }
-
+    @Override
     public void setAnchor(int x, int y) {
         super.setBounds(x, y, getPreferredSize().width, getPreferredSize().height);
     }
-
+    @Override
     public void setAnchor(Component refComp, char align, int gap) {
         if (align == 'V') {
             super.setBounds(refComp.getX(), refComp.getY() + refComp.getHeight() + gap, getPreferredSize().width, getPreferredSize().height);

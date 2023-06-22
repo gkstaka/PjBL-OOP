@@ -1,7 +1,6 @@
 package Functions;
 
 import Pessoa.Client;
-import Pessoa.Employee;
 import Veiculo.Vehicle;
 
 import javax.swing.*;
@@ -9,37 +8,30 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class Sort{
-    public static DefaultListModel<Client> sortClient(DefaultListModel<Client> listModel){
-        System.out.println("sort");
-        ArrayList<Client> elements = new ArrayList<>();
-        for (int i = 0; i < listModel.getSize(); i++) {
-            elements.add(listModel.getElementAt(i));
+public class Sort {
+    public static void sortClientListModel(DefaultListModel<Client> model) {
+        ArrayList<Client> data = new ArrayList<>();
+        for (int i = 0; i < model.getSize(); i++) {
+            data.add(model.get(i));
         }
-        Collections.sort(elements,Comparator.comparing(Client::getName));
-        DefaultListModel<Client> clientsSorted = new DefaultListModel<Client>();
-        for(Client c : elements){
-            clientsSorted.addElement(c);
+        Collections.sort(data, Comparator.comparing(Client::getName));
+        model.clear();
+        for (Client item : data) {
+            model.addElement(item);
         }
-        return clientsSorted;
     }
 
-    public static DefaultListModel<Vehicle> sortVehicle(DefaultListModel<Vehicle> listModel){
-        System.out.println("sort");
-        ArrayList<Vehicle> elements = new ArrayList<>();
-        for (int i = 0; i < listModel.getSize(); i++) {
-            elements.add(listModel.getElementAt(i));
+    public static void sortVehicleListModel(DefaultListModel<Vehicle> model) {
+        ArrayList<Vehicle> data = new ArrayList<>();
+        for (int i = 0; i < model.getSize(); i++) {
+            data.add(model.get(i));
         }
-        Collections.sort(elements,Comparator.comparing(Vehicle::getPlate));
-        Collections.sort(elements,Comparator.comparing(Vehicle::getModel));
-        Collections.sort(elements,Comparator.comparing(Vehicle::getMaker));
-
-        DefaultListModel<Vehicle> vehiclesSorted = new DefaultListModel<Vehicle>();
-        for(Vehicle v : elements){
-            vehiclesSorted.addElement(v);
+        Collections.sort(data, Comparator.comparing(Vehicle::getPlate));
+        Collections.sort(data, Comparator.comparing(Vehicle::getModel));
+        Collections.sort(data, Comparator.comparing(Vehicle::getMaker));
+        model.clear();
+        for (Vehicle item : data) {
+            model.addElement(item);
         }
-        return vehiclesSorted;
     }
-
-
 }

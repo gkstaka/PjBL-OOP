@@ -1,8 +1,7 @@
 package Pessoa;
 
-import Excecoes.CPFInvalido;
-import Excecoes.ExceptionPerson;
-import Excecoes.TelefoneInvalido;
+import Excecoes.PersonExceptionInvalidCPF;
+import Excecoes.PersonExceptionInvalidPhone;
 
 import java.io.Serializable;
 import java.util.Locale;
@@ -13,14 +12,14 @@ public class Person implements Serializable {
     private String cpf;
     private String phone;
 
-    public Person(String name, String cpf, String phone) throws CPFInvalido, TelefoneInvalido {
+    public Person(String name, String cpf, String phone) throws PersonExceptionInvalidCPF, PersonExceptionInvalidPhone {
         this.name = capitalizeName(name);
 
         String formattedCPF = formatCPF(cpf);
-        if (formattedCPF.length() != 11) throw new CPFInvalido();
+        if (formattedCPF.length() != 11) throw new PersonExceptionInvalidCPF();
         this.cpf = formattedCPF.substring(0, 3) + "." + formattedCPF.substring(3, 6) + "." + formattedCPF.substring(6, 9) + "-" + formattedCPF.substring(9, 11);
         String formattedPhoneNumber = formatPhoneNumber(phone);
-        if (phone.length() != 11) throw new TelefoneInvalido();
+        if (phone.length() != 11) throw new PersonExceptionInvalidPhone();
         this.phone = "(" + formattedPhoneNumber.substring(0, 2) + ") " + formattedPhoneNumber.substring(2, 7) + " - " + formattedPhoneNumber.substring(7, 11);
     }
 
@@ -66,9 +65,11 @@ public class Person implements Serializable {
         return phone;
     }
 
-    public void setPhone(String phone) throws TelefoneInvalido {
-        this.phone = phone;
-        if (phone.length() != 11) throw new TelefoneInvalido();
+    public void setPhone(String phone) throws PersonExceptionInvalidPhone {
+        String formattedPhoneNumber = formatPhoneNumber(phone);
+        if (phone.length() != 11) throw new PersonExceptionInvalidPhone();
+        this.phone = "(" + formattedPhoneNumber.substring(0, 2) + ") " + formattedPhoneNumber.substring(2, 7) + " - " + formattedPhoneNumber.substring(7, 11);
+
     }
 
 
