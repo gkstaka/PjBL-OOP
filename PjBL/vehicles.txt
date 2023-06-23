@@ -1,0 +1,58 @@
+Volkswagen Tiguan EFG5678 large 32
+BMW X1 VWX0123 large 12
+Nissan Versa BCD7890 medium 14
+Hyundai Tucson STU6789 large 25
+Renault Duster NOP7890 medium 13
+Chevrolet Cruze CDE1234 medium 4
+Mercedes-Benz Classe C EFG5678 medium 7
+Renault Master NOP7890 large 22
+Jaguar F-Pace EFG5678 large 23
+Subaru Forester PQR2345 large 21
+Kawasaki Ninja 300 MNO7890 small 10
+Volvo XC40 BCD7890 large 26
+Harley-Davidson Sportster 883 JKL3456 small 9
+Ducati Monster 821 VWX0123 small 15
+Ford Transit KLM3456 large 30
+Honda Civic YZA4567 medium 3
+Land Rover Range Rover Evoque CDE1234 large 6
+Acura TLX KLM3456 medium 28
+Lexus NX HIJ9012 large 5
+Nissan X-Trail BCD7890 large 31
+Audi Q3 YZA4567 large 1
+Peugeot 308 PQR2345 medium 20
+Chrysler Pacifica YZA4567 large 18
+Honda HR-V YZA4567 large 21
+BMW Serie 3 YZA4567 medium 40
+Toyota Corolla VWX0123 medium 19
+Mitsubishi Pajero NOP7890 large 27
+Audi A4 VWX0123 medium 33
+Cadillac Escalade VWX0123 large 7
+Chevrolet Tracker CDE1234 large 34
+Alfa Romeo Giulia STU6789 medium 24
+Fiat Fiorino HIJ9012 medium 38
+Triumph Street Triple STU6789 small 35
+Peugeot 2008 PQR2345 large 11
+Chevrolet Onix CDE1234 medium 22
+Renault Sandero NOP7890 medium 17
+KTM Duke 390 YZA4567 small 29
+Honda CG 125 ABC1234 small 37
+Toyota RAV4 VWX0123 large 19
+Suzuki GSX-R 1000 GHI9012 small 2
+Mazda CX-5 HIJ9012 large 0
+Volkswagen Gol EFG5678 medium 8
+Jeep Renegade KLM3456 medium 27
+Fiat Argo HIJ9012 medium 16
+Lexus IS CDE1234 medium 9
+Volvo S60 HIJ9012 medium 7
+Chevrolet S10 CDE1234 large 6
+Dodge Durango BCD7890 large 7
+Yamaha XT 660 DEF5678 small 14
+Peugeot Boxer PQR2345 large 4
+Buick Encore KLM3456 medium 0
+Renault Captur NOP7890 large 9
+GMC Yukon CDE1234 large 6
+Ford Ranger KLM3456 large 7
+Honda CR-V YZA4567 large 2
+Fiat Toro HIJ9012 large 0
+Triumph Street Triple STU6789 small 10
+Hyundai HB20 STU6789 medium 7

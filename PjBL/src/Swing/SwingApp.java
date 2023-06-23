@@ -1,6 +1,7 @@
 package Swing;
 
 import Excecoes.*;
+import Functions.ReaderTextFile;
 import Functions.Serializer;
 import Functions.Sort;
 import Parking.Parking;
@@ -18,6 +19,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.io.Reader;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -63,11 +65,6 @@ public class SwingApp extends JFrame {
         clientsButton.addActionListener(showClients());
         buttonHolderPanel.add(clientsButton);
 
-//        vehiclesButton = new JButton("Veiculos");
-//        vehiclesButton.setFont(tabFont);
-//        vehiclesButton.addActionListener(showVehicles());
-//        buttonHolderPanel.add(vehiclesButton);
-
         parkingSpotsButton = new JButton("Vagas");
         parkingSpotsButton.setFont(tabFont);
         parkingSpotsButton.addActionListener(showParkingSpots());
@@ -99,7 +96,7 @@ public class SwingApp extends JFrame {
             //labers com informacao
             JPanel labelPanel = new JPanel();
             labelPanel.setLayout(new BoxLayout(labelPanel, BoxLayout.Y_AXIS));
-            labelPanel.setPreferredSize(new Dimension(200, 200));
+            labelPanel.setPreferredSize(new Dimension(200, 400));
             Font font = new Font("DIALOG", Font.BOLD, 14);
             JLabel nameLabel = new JLabel("Nome:");
             nameLabel.setFont(font);
@@ -324,6 +321,8 @@ public class SwingApp extends JFrame {
                 vehiclesOwnedFString += (i + 1) + ") " + client.getVehicles().getElementAt(i) + "<br>";
             }
             vehiclesOwnedFString += "</html>";
+            System.out.println(vehiclesLabel.getPreferredSize());
+            System.out.println(vehiclesLabel.getSize());
             vehiclesLabel.setText(vehiclesOwnedFString);
         }
     }
@@ -526,6 +525,7 @@ public class SwingApp extends JFrame {
                     source.putClientProperty("vehicle", motorcycleDefaultListModel.getElementAt(selectedIndex));
                     ((Motorcycle) source.getClientProperty("vehicle")).setParkedTime(dateTime);
                     Serializer.write("parking.spt", parking);
+                    Serializer.write("clients.clt", clients);
                 } catch (IOException exception) {
                     throw new RuntimeException(exception);
                 }
@@ -569,9 +569,11 @@ public class SwingApp extends JFrame {
                     source.putClientProperty("vehicle", mediumCarDefaultListModel.getElementAt(selectedIndex));
                     ((MediumCar) source.getClientProperty("vehicle")).setParkedTime(dateTime);
                     Serializer.write("parking.spt", parking);
+                    Serializer.write("clients.clt", clients);
                 } catch (IOException exception) {
                     throw new RuntimeException(exception);
                 }
+                source.setToolTipText(source.getClientProperty("vehicle").toString());
                 frame.dispose();
             }
 
@@ -610,9 +612,11 @@ public class SwingApp extends JFrame {
                     source.putClientProperty("vehicle", largeCarDefaultListModel.getElementAt(selectedIndex));
                     ((LargeCar) source.getClientProperty("vehicle")).setParkedTime(dateTime);
                     Serializer.write("parking.spt", parking);
+                    Serializer.write("clients.clt", clients);
                 } catch (IOException exception) {
                     throw new RuntimeException(exception);
                 }
+                source.setToolTipText(source.getClientProperty("vehicle").toString());
                 frame.dispose();
             }
 
@@ -625,12 +629,6 @@ public class SwingApp extends JFrame {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-    }
-
-    private static void addCancelButton(JFrame frame, Container contentPane, CustomGridBagConstraints gbc) {
-        JButton cancelButton = new JButton("Cancelar");
-        cancelButton.addActionListener(cancel -> frame.dispose());
-        contentPane.add(cancelButton, gbc);
     }
 
     private void addMotorcycleButtons(CustomGridBagConstraints gbc, ArrayList<JButton> motorcycleSpotButton) {
@@ -672,6 +670,12 @@ public class SwingApp extends JFrame {
             }
             parkingSpotPanel.add(largeCarSpotButton.get(i), gbc);
         }
+    }
+
+    private static void addCancelButton(JFrame frame, Container contentPane, CustomGridBagConstraints gbc) {
+        JButton cancelButton = new JButton("Cancelar");
+        cancelButton.addActionListener(cancel -> frame.dispose());
+        contentPane.add(cancelButton, gbc);
     }
 
     private void payAction(ActionEvent e, JButton source) {
@@ -741,7 +745,11 @@ public class SwingApp extends JFrame {
         try {
             clients = (DefaultListModel<Client>) Serializer.read("clients.clt");
         } catch (IOException | ClassNotFoundException exception) {
-            clients = new DefaultListModel<Client>();
+            System.out.println("Arquivo client.clt nao encontrado");
+            System.out.println("Criacao dos primeiros clientes a partir do arquivo txt");
+            clients = ReaderTextFile.selectClientsFromList();
+            Sort.sortClientListModel(clients);
+            ReaderTextFile.putVehiclesToClients(clients);
         }
         try {
             parking = (Parking) Serializer.read("parking.spt");
