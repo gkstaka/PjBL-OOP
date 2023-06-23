@@ -388,11 +388,12 @@ public class SwingApp extends JFrame {
             private void createClient(String name, String cpf, String phone, JFrame frame) {
                 try {
                     Client newClient = new Client(name, cpf, phone);
-                    boolean isNewClient = false;
+                    boolean isNewClient = true;
                     for (int i = 0; i < clients.getSize(); i++) {
-                        isNewClient = clients.getElementAt(i).equals(newClient);
+                        if (clients.getElementAt(i).equals(newClient)) isNewClient = false;
+                        System.out.println(isNewClient);
                     }
-                    if (! isNewClient) {
+                    if (isNewClient) {
                         clients.addElement(new Client(name, cpf, phone));
                         Sort.sortClientListModel(clients);
                         Serializer.write("clients.clt", clients);
